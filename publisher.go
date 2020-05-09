@@ -10,7 +10,7 @@ type UnityEventPublisher interface {
 	Publish(event UnityEvent) error
 }
 
-type Events struct {
+type Publisher struct {
 	queue amqp.Queue
 	ch *amqp.Channel
 	config Config
@@ -25,8 +25,8 @@ type Config struct {
 	RabbitQueue string
 }
 
-func New(cfg Config) (*Events, error) {
-	e := Events{ config: cfg}
+func New(cfg Config) (*Publisher, error) {
+	e := Publisher{ config: cfg}
 
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%d/", cfg.RabbitUser, cfg.RabbitPass, cfg.RabbitHost, cfg.RabbitPort))
 	if err != nil {
@@ -54,7 +54,7 @@ func New(cfg Config) (*Events, error) {
 	return &e, nil
 }
 
-func (e *Events) Publish(event UnityEvent) error {
+func (e *Publisher) Publish(event UnityEvent) error {
 	body, err := json.Marshal(event)
 	if err != nil {
 		return err
