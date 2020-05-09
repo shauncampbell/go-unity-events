@@ -17,15 +17,7 @@ type Publisher struct {
 	UnityEventPublisher
 }
 
-type Config struct {
-	RabbitHost string
-	RabbitPort int
-	RabbitUser string
-	RabbitPass string
-	RabbitQueue string
-}
-
-func New(cfg Config) (*Publisher, error) {
+func NewPublisher(cfg Config) (*Publisher, error) {
 	e := Publisher{ config: cfg}
 
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%d/", cfg.RabbitUser, cfg.RabbitPass, cfg.RabbitHost, cfg.RabbitPort))

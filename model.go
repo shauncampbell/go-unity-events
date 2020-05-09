@@ -10,3 +10,12 @@ type UnityEvent struct {
 	Units EventUnit `json:"u"`
 	Value string `json:"v"`
 }
+
+type Config struct {
+	ConsumerName string
+	RabbitHost string
+	RabbitPort int
+	RabbitUser string
+	RabbitPass string
+	RabbitQueue string
+}
