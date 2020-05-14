@@ -11,6 +11,13 @@ type UnityEvent struct {
 	Value string `json:"v"`
 }
 
+type UnityCommand struct {
+	DeviceId string `json:"d"`
+	State string `json:"s"`
+	Value string `json:"v"`
+	Target string `json:"t"`
+}
+
 type Config struct {
 	ConsumerName string
 	RabbitHost string
